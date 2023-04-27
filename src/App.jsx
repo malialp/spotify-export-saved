@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Cookies } from "react-cookie";
 import { get_saved_tracks } from "./Utils";
-import { Loading, Buttons, LogInButton, Footer } from "./Components/Components";
+import { Loading, Buttons, LoginButton, Footer } from "./Components/Components";
 
 const cookies = new Cookies();
 
@@ -52,7 +52,7 @@ const App = () => {
                 {songs ? <Buttons songs={songs} /> : <Loading />}
               </div>
             ) : (
-              <LogInButton />
+              <LoginButton />
             )}
           </div>
         </div>
