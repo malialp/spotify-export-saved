@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Cookies } from "react-cookie";
-import { get_saved_tracks, export_data_csv, export_data_json } from "./Utils";
-import { auth_url } from "./Constants";
+import { get_saved_tracks } from "./Utils";
+import { Loading, Buttons, LogInButton, Footer } from "./Components/Components";
 
 const cookies = new Cookies();
 
@@ -16,6 +16,8 @@ const App = () => {
       const token = new URLSearchParams(window.location.hash.substring(1)).get(
         "access_token"
       );
+
+      window.location.href = window.location.href.split("#")[0] + "#";
 
       setToken(token);
       cookies.set("access_token", token, {
@@ -38,50 +40,23 @@ const App = () => {
   }, [token]);
 
   return (
-    <div className="bg-blue-400 h-full">
-      <div className="container mx-auto flex justify-center items-center h-full -translate-y-36">
-        <div className="bg-blue-500 p-5 rounded-xl">
-          <h1 className="text-white text-3xl font-medium">
-            Export Saved Tracks
+    <div className="bg-[#323232] h-full">
+      <div className="container mx-auto h-full flex flex-col">
+        <div className="h-full grid grid-cols-1 grid-rows-2 mx-auto">
+          <h1 className="text-[#FFF2F9] text-[2.25rem] font-bold font-lobster w-full pt-4">
+            Export Your Saved Songs
           </h1>
-          <hr />
-          <div className="flex justify-center mt-4">
-            {token !== null ? (
-              <div>
-                {songs !== null ? (
-                  <div className="flex flex-col gap-2">
-                    <button
-                      className="text-white text-lg bg-green-600 rounded-lg py-2 px-3 font-medium"
-                      onClick={() => {
-                        export_data_json(songs);
-                      }}
-                    >
-                      Export Data as JSON
-                    </button>
-
-                    <button
-                      className="text-white text-lg bg-green-600 rounded-lg py-2 px-3 font-medium"
-                      onClick={() => {
-                        export_data_csv(songs);
-                      }}
-                    >
-                      Export Data as CSV
-                    </button>
-                  </div>
-                ) : (
-                  <h1 className="text-white text-lg">Please Wait...</h1>
-                )}
+          <div>
+            {token ? (
+              <div className="flex flex-col gap-2 -translate-y-10">
+                {songs ? <Buttons songs={songs} /> : <Loading />}
               </div>
             ) : (
-              <a
-                href={auth_url}
-                className="text-white text-lg bg-green-600 rounded-lg py-2 px-3 font-medium"
-              >
-                Log In With Spotify
-              </a>
+              <LogInButton />
             )}
           </div>
         </div>
+        <Footer />
       </div>
     </div>
   );
