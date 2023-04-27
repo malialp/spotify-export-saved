@@ -1,4 +1,4 @@
-const client_id = "your-client-id";
+const client_id = "client-id";
 const scope = "user-library-read";
 const redirect_uri = "http://localhost:5173/";
 
