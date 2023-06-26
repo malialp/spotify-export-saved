@@ -6,9 +6,9 @@ const Footer = () => {
       Made with <span className="text-[#e25555]">&#9829;</span> by{" "}
       <a
         className="hover:underline hover:text-[#FA4EAB]"
-        href="https://github.com/AliBaba05"
+        href="https://github.com/malialp"
       >
-        AliBaba05
+        malialp0
       </a>
     </div>
   );
