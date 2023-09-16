@@ -33,7 +33,7 @@ If you would like to contribute to this project, please follow these steps:
 
 ## Credits
 
-This app was built by [AliBaba05](https://github.com/AliBaba05) using the Spotify Web API and the React JS library.
+This app was built by [malialp](https://github.com/malialp) using the Spotify Web API and the React JS library.
 
 ## License
 
