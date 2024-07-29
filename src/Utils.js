@@ -32,7 +32,7 @@ export async function get_saved_tracks(token) {
     .get("https://api.spotify.com/v1/me/tracks", { headers: headers })
     .then(async (res) => (total = await res.data.total))
     .catch(async (err) => {
-      console.log("fetch error");
+      console.log("fetch error", err);
     });
 
   const promises = [];

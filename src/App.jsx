@@ -1,62 +1,37 @@
-import { useEffect, useState } from "react";
-import { Cookies } from "react-cookie";
-import { get_saved_tracks } from "./Utils";
-import { Loading, Buttons, LoginButton, Footer } from "./Components/Components";
-
-const cookies = new Cookies();
+import { useState } from "react";
+import Button from "./Components/Button";
 
 const App = () => {
   const [token, setToken] = useState(null);
-  const [songs, setSongs] = useState(null);
-
-  useEffect(() => {
-    const hash = window.location.hash;
-
-    if (hash !== "") {
-      const token = new URLSearchParams(window.location.hash.substring(1)).get(
-        "access_token"
-      );
-
-      window.location.href = window.location.href.split("#")[0] + "#";
-
-      setToken(token);
-      cookies.set("access_token", token, {
-        maxAge: 3600,
-      });
-    } else {
-      const token = cookies.get("access_token");
-      if (token) setToken(token);
-    }
-  }, []);
-
-  useEffect(() => {
-    if (token) {
-      const data = get_saved_tracks(token);
-      data.then((val) => {
-        console.log(val);
-        setSongs(val);
-      });
-    }
-  }, [token]);
 
   return (
-    <div className="bg-[#323232] h-full">
-      <div className="container mx-auto h-full flex flex-col">
-        <div className="h-full grid grid-cols-1 grid-rows-2 mx-auto">
-          <h1 className="text-[#FFF2F9] text-[2.25rem] font-bold font-lobster w-full pt-4">
-            Export Your Saved Songs
-          </h1>
-          <div>
-            {token ? (
-              <div className="flex flex-col gap-2 -translate-y-10">
-                {songs ? <Buttons songs={songs} /> : <Loading />}
-              </div>
-            ) : (
-              <LoginButton />
-            )}
+    <div className="bg-dark h-full">
+      <div className="container mx-auto h-full flex flex-col items-center md:flex-row">
+        <section className="h-full w-full md:w-1/2 px-16 flex items-center justify-center">
+          <div className="flex flex-col justify-start gap-5">
+            <h1 className="text-light text-4xl font-extrabold">
+              Spotify Export Saved
+            </h1>
+            <p className="text-light text-[18px] font-light min-w-[300px] max-w-[500px]">
+              This tool allows users to export their saved songs on Spotify to a
+              CSV or JSON file. It uses the Spotify Web API to retrieve the
+              user&apos;s saved songs and export them in a CSV or JSON format
+              that can be easily imported into other music platforms or analyzed
+              in spreadsheet software.
+            </p>
           </div>
-        </div>
-        <Footer />
+        </section>
+        {!token ? (
+          <section className="h-full w-full md:w-1/2 px-16 flex flex-col items-center justify-center">
+            <Button>Login With Spotify</Button>
+          </section>
+        ) : (
+          <section className="h-full w-full md:w-1/2 px-16 flex flex-col items-center justify-center">
+            <h1 className="text-light text-4xl font-extrabold">
+              Logged in successfully
+            </h1>
+          </section>
+        )}
       </div>
     </div>
   );
