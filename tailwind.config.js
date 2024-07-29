@@ -4,10 +4,12 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        lobster: ["Lobster", "sans-serif"],
+        poppins: ["Poppins", "sans-serif"],
       },
       colors: {
-        darkgray: "rgba(255,255,255,0.1)",
+        dark: "#1a1a1a",
+        light: "#fcfcfc",
+        midLight: "rgba(252, 252, 252, 0.5)",
       },
     },
   },
