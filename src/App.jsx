@@ -5,11 +5,11 @@ import { Cookies } from "react-cookie";
 import {
   get_saved_tracks,
   parseMillisecondsIntoReadableTime,
-  downloadFile,
   export_data_json,
   export_data_csv,
 } from "./Utils";
 import { Scrollbars } from "react-custom-scrollbars-2";
+import { BsGithub } from "react-icons/bs";
 
 const cookies = new Cookies();
 
@@ -50,7 +50,7 @@ const App = () => {
 
   return (
     <div className="bg-dark h-full">
-      <div className="container mx-auto h-full flex flex-col items-center md:flex-row">
+      <div className="container mx-auto relative h-full flex flex-col items-center md:flex-row">
         <section className="h-full w-full md:w-1/2 px-16 flex items-center justify-center">
           <div className="flex flex-col justify-start gap-5">
             <h1 className="text-light text-4xl font-extrabold">
@@ -69,7 +69,7 @@ const App = () => {
           <section className="h-full w-full md:w-1/2 px-16 flex flex-col items-center justify-center">
             <Button
               href={auth_url}
-              style="rounded-[10px] text-[18px] font-medium"
+              style="rounded-[10px] text-[18px] font-medium px-4 py-2"
             >
               Login With Spotify
             </Button>
@@ -139,13 +139,13 @@ const App = () => {
 
                   <div className="flex flex-row gap-6">
                     <Button
-                      style="rounded-[10px] text-[18px] font-bold"
+                      style="rounded-[10px] text-[18px] font-bold px-4 py-2"
                       onClick={() => export_data_csv(songs)}
                     >
                       .csv
                     </Button>
                     <Button
-                      style="rounded-[10px] text-[18px] font-bold"
+                      style="rounded-[10px] text-[18px] font-bold px-4 py-2"
                       onClick={() => export_data_json(songs)}
                     >
                       .json
@@ -156,6 +156,12 @@ const App = () => {
             )}
           </section>
         )}
+        <Button
+          href="https://github.com/malialp/spotify-export-saved"
+          style="text-dark absolute left-4 bottom-4 p-2 rounded-lg"
+        >
+          <BsGithub className="h-auto w-[22px]" />
+        </Button>
       </div>
     </div>
   );
