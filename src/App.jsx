@@ -1,8 +1,52 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./Components/Button";
+import { auth_url } from "./Constants";
+import { Cookies } from "react-cookie";
+import {
+  get_saved_tracks,
+  parseMillisecondsIntoReadableTime,
+  downloadFile,
+  export_data_json,
+  export_data_csv,
+} from "./Utils";
+import { Scrollbars } from "react-custom-scrollbars-2";
+
+const cookies = new Cookies();
 
 const App = () => {
   const [token, setToken] = useState(null);
+  const [songs, setSongs] = useState(null);
+
+  useEffect(() => {
+    const hash = window.location.hash.substring(1);
+
+    if (hash !== "") {
+      window.location.href = window.location.href.split("#")[0] + "#";
+
+      const URLSP = new URLSearchParams(hash);
+
+      const access_token = URLSP.get("access_token");
+      const expires_in = URLSP.get("expires_in");
+
+      setToken(access_token);
+
+      cookies.set("access_token", access_token, {
+        maxAge: expires_in,
+      });
+    } else {
+      const access_token = cookies.get("access_token");
+      if (access_token) setToken(access_token);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (token) {
+      const data = get_saved_tracks(token);
+      data.then((val) => {
+        setSongs(val);
+      });
+    }
+  }, [token]);
 
   return (
     <div className="bg-dark h-full">
@@ -23,13 +67,93 @@ const App = () => {
         </section>
         {!token ? (
           <section className="h-full w-full md:w-1/2 px-16 flex flex-col items-center justify-center">
-            <Button>Login With Spotify</Button>
+            <Button
+              href={auth_url}
+              style="rounded-[10px] text-[18px] font-medium"
+            >
+              Login With Spotify
+            </Button>
           </section>
         ) : (
           <section className="h-full w-full md:w-1/2 px-16 flex flex-col items-center justify-center">
-            <h1 className="text-light text-4xl font-extrabold">
-              Logged in successfully
-            </h1>
+            {!songs ? (
+              <h1 className="text-light text-4xl font-extrabold">
+                Retrieving songs...
+              </h1>
+            ) : (
+              <div className="w-full flex flex-col justify-start gap-4">
+                <Scrollbars
+                  style={{ width: "100%", height: "350px" }}
+                  className="relative overflow-x-auto shadow-md sm:rounded-lg w-full"
+                >
+                  <table className="w-full text-sm text-left text-light ">
+                    <thead className="text-xs text-light bg-tableDark sticky top-0">
+                      <tr>
+                        <th scope="col" className="px-6 py-3 w-[10%]">
+                          a
+                        </th>
+                        <th scope="col" className="px-6 py-3 w-[45%]">
+                          Title
+                        </th>
+                        <th scope="col" className="px-6 py-3 w-[40%]">
+                          Album
+                        </th>
+                        <th scope="col" className="px-6 py-3 w-[5%]">
+                          d
+                        </th>
+                      </tr>
+                    </thead>
+                    {/* ADD REACT WINDOW */}
+                    <tbody>
+                      {songs.map((song) => (
+                        <tr
+                          key={song.track.id}
+                          className="bg-tableLight border-b border-tableBorder"
+                        >
+                          <th
+                            scope="row"
+                            className="px-3 py-1 text-light whitespace-nowrap"
+                          >
+                            <img
+                              src={song.track.album.images[0]?.url}
+                              className="rounded-sm"
+                            />
+                          </th>
+                          <td className="px-6 py-4">{song.track.name}</td>
+                          <td className="px-6 py-4">{song.track.album.name}</td>
+                          <td className="px-6 py-4">
+                            {parseMillisecondsIntoReadableTime(
+                              song.track.duration_ms
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </Scrollbars>
+
+                <div className="flex flex-row justify-between items-center px-4">
+                  <h1 className="text-light opacity-80 text-md font-medium">
+                    {songs.length} song counted
+                  </h1>
+
+                  <div className="flex flex-row gap-6">
+                    <Button
+                      style="rounded-[10px] text-[18px] font-bold"
+                      onClick={() => export_data_csv(songs)}
+                    >
+                      .csv
+                    </Button>
+                    <Button
+                      style="rounded-[10px] text-[18px] font-bold"
+                      onClick={() => export_data_json(songs)}
+                    >
+                      .json
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            )}
           </section>
         )}
       </div>

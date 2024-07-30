@@ -1,6 +1,6 @@
 import axios from "axios";
 
-function parseMillisecondsIntoReadableTime(milliseconds) {
+export function parseMillisecondsIntoReadableTime(milliseconds) {
   //Get hours from milliseconds
   var hours = milliseconds / (1000 * 60 * 60);
   var absoluteHours = Math.floor(hours);

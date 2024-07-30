@@ -3,13 +3,13 @@ export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
-      fontFamily: {
-        poppins: ["Poppins", "sans-serif"],
-      },
       colors: {
         dark: "#1a1a1a",
         light: "#fcfcfc",
         midLight: "rgba(252, 252, 252, 0.5)",
+        tableDark: "#333333",
+        tableLight: "#474747",
+        tableBorder: "#5b5b5b",
       },
     },
   },
