@@ -1,4 +1,4 @@
-const client_id = "client-id";
+const client_id = import.meta.env.VITE_CLIENT_ID;
 const scope = "user-library-read";
 const redirect_uri = "http://localhost:5173/";
 
