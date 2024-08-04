@@ -50,8 +50,8 @@ const App = () => {
 
   return (
     <div className="bg-dark h-full">
-      <div className="container mx-auto relative h-full flex flex-col items-center md:flex-row">
-        <section className="h-full w-full md:w-1/2 px-16 flex items-center justify-center">
+      <div className="container mx-auto relative h-full flex flex-col items-center lg:flex-row">
+        <section className="h-full w-full lg:w-1/2 px-16 flex items-center justify-center">
           <div className="flex flex-col justify-start gap-5">
             <h1 className="text-light text-4xl font-extrabold">
               Spotify Export Saved
@@ -66,7 +66,7 @@ const App = () => {
           </div>
         </section>
         {!token ? (
-          <section className="h-full w-full md:w-1/2 px-16 flex flex-col items-center justify-center">
+          <section className="h-full w-full lg:w-1/2 px-16 flex flex-col items-center justify-center">
             <Button
               href={auth_url}
               style="rounded-[10px] text-[18px] font-medium px-4 py-2"
@@ -75,7 +75,7 @@ const App = () => {
             </Button>
           </section>
         ) : (
-          <section className="h-full w-full md:w-1/2 px-16 flex flex-col items-center justify-center">
+          <section className="h-full w-full lg:w-1/2 px-16 flex flex-col items-center justify-center">
             {!songs ? (
               <h1 className="text-light text-4xl font-extrabold">
                 Retrieving songs...
@@ -84,10 +84,10 @@ const App = () => {
               <div className="w-full flex flex-col justify-start gap-4">
                 <Scrollbars
                   style={{ width: "100%", height: "350px" }}
-                  className="relative overflow-x-auto shadow-md sm:rounded-lg w-full"
+                  className="relative overflow-x-auto shadow-xl sm:rounded-lg w-full border-[1px] border-tableBorder"
                 >
-                  <table className="w-full text-sm text-left text-light ">
-                    <thead className="text-xs text-light bg-tableDark sticky top-0">
+                  <table className="w-full text-sm text-left text-light">
+                    <thead className="text-xs text-light backdrop-blur-[5px] sticky top-0">
                       <tr>
                         <th scope="col" className="px-6 py-3 w-[10%]">
                           a
@@ -108,7 +108,7 @@ const App = () => {
                       {songs.map((song) => (
                         <tr
                           key={song.track.id}
-                          className="bg-tableLight border-b border-tableBorder"
+                          className=" border-b border-tableBorder"
                         >
                           <th
                             scope="row"
@@ -133,7 +133,7 @@ const App = () => {
                 </Scrollbars>
 
                 <div className="flex flex-row justify-between items-center px-4">
-                  <h1 className="text-light opacity-80 text-md font-medium">
+                  <h1 className="text-light opacity-80 text-lg font-medium">
                     {songs.length} song counted
                   </h1>
 
