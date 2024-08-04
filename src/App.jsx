@@ -97,7 +97,7 @@ const App = () => {
                     </div>
                     {/* BODY */}
                     <div className="flex flex-col text-sm">
-                      {songs.slice(0, 100).map((song) => (
+                      {songs.map((song) => (
                         <div
                           key={song.track.id}
                           className="w-full flex flex-row p-2 bg-tableLight border-b border-tableBorder items-center"
