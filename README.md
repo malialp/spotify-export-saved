@@ -10,10 +10,10 @@ To use this app, follow these steps:
 1.  Clone this repository to your local machine using `git clone https://github.com/AliBaba05/spotify-export-saved.git`.
 2.  Navigate to the project directory using `cd spotify-export-saved`.
 3.  Install the necessary dependencies using `npm install`.
-4.  Add your Spotify client ID into `Constants.js` file as follows:
+4.  Add your Spotify client ID into `.env` file as follows:
 
 	```javascript
-	const client_id = "your-client-id";
+	VITE_CLIENT_ID=your-client-id
 	...
 	```
 
