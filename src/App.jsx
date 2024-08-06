@@ -87,7 +87,7 @@ const App = () => {
                     className="relative overflow-x-auto w-full rounded-xl shadow-lg text-light select-none"
                   >
                     {/* HEAD */}
-                    <div className="sticky top-0 left-0 w-full flex flex-row bg-tableDark p-2 font-medium">
+                    <div className="sticky top-0 left-0 w-full flex flex-row bg-white bg-opacity-10 backdrop-blur-sm p-2 font-medium">
                       <div className="w-[20%] xl:w-[10%] text-center">a</div>
                       <div className="w-[40%] px-2">Title</div>
                       <div className="w-[40%] px-2">Album</div>
@@ -97,10 +97,10 @@ const App = () => {
                     </div>
                     {/* BODY */}
                     <div className="flex flex-col text-sm">
-                      {songs.map((song) => (
+                      {songs.slice(0, 100).map((song) => (
                         <div
                           key={song.track.id}
-                          className="w-full flex flex-row p-2 bg-tableLight border-b border-tableBorder items-center"
+                          className="w-full flex flex-row p-2 bg-white bg-opacity-5 border-b border-tableBorder items-center"
                         >
                           <div className="w-[20%] xl:w-[10%] grid justify-center">
                             <img
@@ -129,7 +129,7 @@ const App = () => {
                       {songs.length} song counted
                     </h1>
 
-                    <div className="flex flex-row gap-6">
+                    <div className="flex flex-row gap-6 select-none">
                       <Button
                         style="rounded-[10px] text-[18px] font-bold px-4 py-2"
                         onClick={() => export_data_csv(songs)}
@@ -153,7 +153,8 @@ const App = () => {
           <span>
             Created by{" "}
             <a
-              className="text-pink-600 shadow-pink-500 shadow-2xl drop-shadow-2xl hover:underline"
+              className="text-pink-600 shadow-2xl drop-shadow-2xl hover:underline duration-200"
+              id="github-link"
               target="_blank"
               rel="noreferrer"
               href="https://github.com/malialp/spotify-export-saved"
