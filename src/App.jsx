@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import Button from "./Components/Button";
 import { auth_url } from "./Constants";
 import { Cookies } from "react-cookie";
-import { Scrollbars } from "react-custom-scrollbars-2";
 
 import { FixedSizeList } from "react-window";
 import AutoSizer from "react-virtualized-auto-sizer";
