@@ -3,12 +3,12 @@ import Button from "./Components/Button";
 import { auth_url } from "./Constants";
 import { Cookies } from "react-cookie";
 import { Scrollbars } from "react-custom-scrollbars-2";
-import {
-  get_saved_tracks,
-  parseMillisecondsIntoReadableTime,
-  export_data_json,
-  export_data_csv,
-} from "./Utils";
+
+import { FixedSizeList } from "react-window";
+import AutoSizer from "react-virtualized-auto-sizer";
+import Row from "./Components/Row";
+
+import { get_saved_tracks, export_data_json, export_data_csv } from "./Utils";
 
 const cookies = new Cookies();
 
@@ -81,11 +81,9 @@ const App = () => {
                   Retrieving songs...
                 </h1>
               ) : (
-                <div className="w-full flex flex-col justify-start gap-4">
-                  <Scrollbars
-                    style={{ width: "100%", height: "350px" }}
-                    className="relative overflow-x-auto w-full rounded-xl shadow-lg text-light select-none"
-                  >
+                <div className="w-full flex flex-col justify-start gap-4 h-full md:h-[80%]">
+                  {/* TABLE */}
+                  <div className="relative overflow-x-auto w-full rounded-xl shadow-lg text-light select-none h-full overflow-hidden">
                     {/* HEAD */}
                     <div className="sticky top-0 left-0 w-full flex flex-row bg-white bg-opacity-10 backdrop-blur-sm p-2 font-medium">
                       <div className="w-[20%] xl:w-[10%] text-center">a</div>
@@ -96,33 +94,21 @@ const App = () => {
                       </div>
                     </div>
                     {/* BODY */}
-                    <div className="flex flex-col text-sm">
-                      {songs.slice(0, 100).map((song) => (
-                        <div
-                          key={song.track.id}
-                          className="w-full flex flex-row p-2 bg-white bg-opacity-5 border-b border-tableBorder items-center"
+                    <AutoSizer>
+                      {({ width, height }) => (
+                        <FixedSizeList
+                          className="text-sm"
+                          itemCount={songs.length}
+                          itemData={songs}
+                          itemSize={48}
+                          height={height}
+                          width={width}
                         >
-                          <div className="w-[20%] xl:w-[10%] grid justify-center">
-                            <img
-                              src={song.track.album.images[0]?.url}
-                              className="rounded-sm w-[40px] h-auto"
-                            />
-                          </div>
-                          <div className="w-[40%] px-2 whitespace-nowrap overflow-hidden text-ellipsis">
-                            {song.track.name}
-                          </div>
-                          <div className="w-[40%] px-2 whitespace-nowrap overflow-hidden text-ellipsis">
-                            {song.track.album.name}
-                          </div>
-                          <div className="w-[10%] text-center hidden xl:block">
-                            {parseMillisecondsIntoReadableTime(
-                              song.track.duration_ms
-                            )}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </Scrollbars>
+                          {Row}
+                        </FixedSizeList>
+                      )}
+                    </AutoSizer>
+                  </div>
 
                   <div className="flex flex-row justify-between items-center px-4">
                     <h1 className="text-light opacity-80 text-md font-medium">
