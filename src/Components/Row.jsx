@@ -11,7 +11,11 @@ const Row = (props) => {
     >
       <div className="w-[20%] xl:w-[10%] grid justify-center">
         <img
-          src={song.track.album.images[0]?.url}
+          src={
+            song.track.album.images.length > 0
+              ? song.track.album.images.at(-1).url
+              : ""
+          }
           className="rounded-sm w-[40px] h-auto"
         />
       </div>
