@@ -7,7 +7,7 @@ This is a web application built with React JS that allows users to export their 
 
 To use this app, follow these steps:
 
-1.  Clone this repository to your local machine using `git clone https://github.com/AliBaba05/spotify-export-saved.git`.
+1.  Clone this repository to your local machine using `git clone https://github.com/malialp/spotify-export-saved.git`.
 2.  Navigate to the project directory using `cd spotify-export-saved`.
 3.  Install the necessary dependencies using `npm install`.
 4.  Add your Spotify client ID into `.env` file as follows:
@@ -24,7 +24,7 @@ To use this app, follow these steps:
 If you would like to contribute to this project, please follow these steps:
 
 1.  Fork this repository to your own GitHub account.
-2.  Clone the forked repository to your local machine using `git clone https://github.com/AliBaba05/spotify-export-saved.git`.
+2.  Clone the forked repository to your local machine using `git clone https://github.com/malialp/spotify-export-saved.git`.
 3.  Create a new branch for your changes using `git checkout -b my-new-feature`.
 4.  Make your changes and test them thoroughly.
 5.  Commit your changes using `git commit -am 'Add some feature'`.
