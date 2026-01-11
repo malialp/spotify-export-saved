@@ -1,6 +1,6 @@
 const client_id = import.meta.env.VITE_CLIENT_ID;
 const scope = "user-library-read";
-const redirect_uri = "http://localhost:5173/";
+const redirect_uri = "http://127.0.0.1:3000/";
 
 export const auth_url =
   "https://accounts.spotify.com/authorize" +
