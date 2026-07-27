@@ -86,26 +86,3 @@ export function storeTokens({ access_token, refresh_token, expires_in }) {
   }
 }
 
-/**
- * Gets stored code verifier for PKCE
- * @returns {string|null} Code verifier or null
- */
-export function getCodeVerifier() {
-  return getItem(STORAGE_KEYS.CODE_VERIFIER);
-}
-
-/**
- * Stores code verifier for PKCE
- * @param {string} verifier - Code verifier
- */
-export function storeCodeVerifier(verifier) {
-  setItem(STORAGE_KEYS.CODE_VERIFIER, verifier);
-}
-
-/**
- * Removes code verifier after use
- */
-export function clearCodeVerifier() {
-  removeItem(STORAGE_KEYS.CODE_VERIFIER);
-}
-

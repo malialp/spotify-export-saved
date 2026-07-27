@@ -1,40 +1,63 @@
-
 # Spotify Saved Song Exporter
 
-This is a web application built with React JS that allows users to export their saved songs on Spotify to a CSV or JSON file. The app uses the Spotify Web API to retrieve the user's saved songs and export them in a CSV or JSON format that can be easily imported into other music platforms or analyzed in spreadsheet software.
+A modern React web application that exports your Spotify saved tracks ("Liked Songs") into **CSV** or **JSON** format. You can use it to archive your library, analyze your listening history, or import your tracks into other music services.
+
+## Features
+
+- 🎵 **Fetch Saved Tracks**: Retrieves all tracks saved in your Spotify library using the Spotify Web API.
+- 📁 **Export Formats**: Export your saved tracks list with full track, artist, album, and release date details in **CSV** or **JSON** formats.
+- ⚡ **Local Caching**: Uses IndexedDB for client-side caching to reduce unnecessary API calls and ensure quick load times.
+- 🔑 **Standard OAuth 2.0 Flow**: Implements Spotify Authorization Code Flow with Client ID and Client Secret authentication.
 
 ## Installation and Setup
 
-To use this app, follow these steps:
+### Prerequisites
 
-1.  Clone this repository to your local machine using `git clone https://github.com/malialp/spotify-export-saved.git`.
-2.  Navigate to the project directory using `cd spotify-export-saved`.
-3.  Install the necessary dependencies using `npm install`.
-4.  Add your Spotify client ID into `.env` file as follows:
+- Node.js (v16 or higher)
+- A Spotify Developer account
 
-	```javascript
-	VITE_CLIENT_ID=your-client-id
-	...
-	```
+### 1. Register Spotify Developer App
 
-6.  Run the app using `npm run dev`.
+1. Go to the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard).
+2. Click **Create an App**.
+3. Set **Redirect URI** to `http://127.0.0.1:3000/` (or `http://localhost:3000/`).
+4. Save your **Client ID** and **Client Secret**.
 
-## Contributing
+### 2. Project Setup
 
-If you would like to contribute to this project, please follow these steps:
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/malialp/spotify-export-saved.git
+   cd spotify-export-saved
+   ```
 
-1.  Fork this repository to your own GitHub account.
-2.  Clone the forked repository to your local machine using `git clone https://github.com/malialp/spotify-export-saved.git`.
-3.  Create a new branch for your changes using `git checkout -b my-new-feature`.
-4.  Make your changes and test them thoroughly.
-5.  Commit your changes using `git commit -am 'Add some feature'`.
-6.  Push your changes to your forked repository using `git push origin my-new-feature`.
-7.  Submit a pull request to the original repository.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Credits
+3. Create a `.env` file in the root directory:
+   ```env
+   VITE_CLIENT_ID=your-spotify-client-id
+   VITE_CLIENT_SECRET=your-spotify-client-secret
+   VITE_REDIRECT_URI=http://127.0.0.1:3000/
+   ```
 
-This app was built by [malialp](https://github.com/malialp) using the Spotify Web API and the React JS library.
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+5. Open your browser at `http://127.0.0.1:3000/` and log in with your Spotify account.
+
+## Built With
+
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)
+- [Spotify Web API](https://developer.spotify.com/documentation/web-api)
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.

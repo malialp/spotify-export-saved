@@ -1,6 +1,7 @@
 // Spotify Configuration
 export const SPOTIFY_CONFIG = {
   CLIENT_ID: import.meta.env.VITE_CLIENT_ID,
+  CLIENT_SECRET: import.meta.env.VITE_CLIENT_SECRET,
   REDIRECT_URI: import.meta.env.VITE_REDIRECT_URI || 'http://127.0.0.1:3000/',
   SCOPES: ['user-library-read'],
   AUTH_ENDPOINT: 'https://accounts.spotify.com/authorize',
@@ -13,7 +14,6 @@ export const STORAGE_KEYS = {
   ACCESS_TOKEN: 'spotify_access_token',
   REFRESH_TOKEN: 'spotify_refresh_token',
   TOKEN_EXPIRY: 'spotify_token_expiry',
-  CODE_VERIFIER: 'spotify_code_verifier',
 };
 
 // Cache Configuration

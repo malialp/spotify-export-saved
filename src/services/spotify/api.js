@@ -51,7 +51,7 @@ async function apiRequest(endpoint, token, options = {}, retries = 3) {
       if (response.status === 429) {
         const retryAfter = parseInt(response.headers.get('Retry-After') || '1', 10);
         const waitTime = (retryAfter + 1) * 1000; // Add 1 second buffer
-        
+
         console.warn(`Rate limited. Waiting ${waitTime}ms before retry...`);
         await delay(waitTime);
         continue;
